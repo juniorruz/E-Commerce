@@ -61,7 +61,7 @@ const Header = () => {
           </div>
           <div className="lg:pl-4">
             <h1 className="bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 bg-clip-text text-3xl font-bold text-transparent lg:text-5xl">
-              Neon Tech
+              <Link href="/">Neon Tech</Link>
             </h1>
           </div>
           <div className="relative hidden w-[350px] lg:block 2xl:w-[500px]">
