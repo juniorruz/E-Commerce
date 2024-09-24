@@ -1,10 +1,10 @@
 "use client"
 
 import { Notebook } from "../_components/notebook"
-import { useNoteBook } from "../hooks/useNoteBook"
+import { useProduct } from "../hooks/useProduct"
 
 const NotebookPage = () => {
-  const { notebooks } = useNoteBook()
+  const { notebooks } = useProduct()
   return (
     <>
       {" "}

@@ -46,7 +46,7 @@ const Header = () => {
                 <nav className="mt-16 flex-1">
                   <ul>
                     <li>
-                      <Link href="/#">Computadores</Link>
+                      <Link href="/#">notebooks</Link>
                     </li>
                     <li>
                       <Link href="/#">Computadores</Link>
@@ -60,7 +60,7 @@ const Header = () => {
             </>
           </div>
           <div className="lg:pl-4">
-            <h1 className="bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 bg-clip-text text-3xl font-bold text-transparent lg:text-5xl">
+            <h1 className="bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 bg-clip-text pl-4 text-3xl font-bold text-transparent md:pl-0 lg:text-5xl">
               <Link href="/">Neon Tech</Link>
             </h1>
           </div>
@@ -68,7 +68,7 @@ const Header = () => {
             <Input type="text" placeholder="Digite o que você procura" />
             <Search className="absolute right-2 top-3" width={20} height={20} />
           </div>
-          <div className="flex items-center space-x-4 lg:p-4">
+          <div className="flex items-center lg:space-x-2 lg:p-4">
             <Button className="border-none" variant="outline">
               <HeartFilledIcon
                 width={28}
@@ -77,13 +77,22 @@ const Header = () => {
               />
               <span className="ml-2 hidden lg:block">Favoritos</span>
             </Button>
-            <Button
-              className="h-16 border-none lg:bg-green-500 lg:hover:border-green-500 lg:hover:bg-green-800"
-              variant="outline"
-            >
-              <ShoppingCart width={28} height={28} />
-              <span className="hidden lg:block">Meu carrinho</span>
-            </Button>
+
+            <div className="items-center justify-center">
+              <Button
+                className="relative h-16 border-none lg:bg-green-500 lg:hover:border-green-500 lg:hover:bg-green-800"
+                variant="outline"
+              >
+                <div className="relative">
+                  <ShoppingCart width={28} height={28} />
+
+                  <span className="absolute -right-2 -top-3 flex pl-2 lg:text-white">
+                    0
+                  </span>
+                </div>
+                <h3 className="hidden lg:block lg:pl-2">Meu carrinho</h3>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,12 +1,12 @@
-import { NotebookProvider } from "./contexts/notebookContext"
 import Header from "./_components/header"
+import { ProductProvider } from "./contexts/productContext"
 import NotebookPage from "./notebooks/page"
 
 export default function Home() {
   return (
-    <NotebookProvider>
+    <ProductProvider>
       <Header />
       <NotebookPage />
-    </NotebookProvider>
+    </ProductProvider>
   )
 }

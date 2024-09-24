@@ -3,20 +3,20 @@
 import { createContext, useEffect, useState } from "react"
 
 import { getNotebooks } from "@/services/api"
-import { NotebookData } from "../interfaces/notebookData"
+import { ProductData } from "../interfaces/productData"
 
-interface NotebookContextProps {
-  notebooks: NotebookData[]
+interface ProductContextProps {
+  notebooks: ProductData[]
 }
 
-interface NotebookProviderProps {
+interface ProductProviderProps {
   children: React.ReactNode
 }
 
-export const NotebookContext = createContext({} as NotebookContextProps)
+export const ProductContext = createContext({} as ProductContextProps)
 
-export function NotebookProvider({ children }: NotebookProviderProps) {
-  const [notebooks, setNotebooks] = useState<NotebookData[]>([])
+export function ProductProvider({ children }: ProductProviderProps) {
+  const [notebooks, setNotebooks] = useState<ProductData[]>([])
 
   useEffect(() => {
     ;(async () => {
@@ -32,8 +32,8 @@ export function NotebookProvider({ children }: NotebookProviderProps) {
   }, [])
 
   return (
-    <NotebookContext.Provider value={{ notebooks }}>
+    <ProductContext.Provider value={{ notebooks }}>
       {children}
-    </NotebookContext.Provider>
+    </ProductContext.Provider>
   )
 }

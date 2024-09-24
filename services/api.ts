@@ -1,4 +1,4 @@
-import { NotebookData } from "@/app/interfaces/notebookData"
+import { NotebookData } from "@/app/interfaces/productData"
 import axios from "axios"
 
 const api = axios.create({

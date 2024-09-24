@@ -1,4 +1,4 @@
-export interface NotebookData {
+export interface ProductData {
   id: string
   imageUrl: string
   brand: string
