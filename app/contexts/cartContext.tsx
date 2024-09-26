@@ -1,8 +1,11 @@
-import { createContext, ReactNode, useState } from "react"
-import { ProductData } from "../interfaces/productData"
-import { useRouter } from "next/router"
+"use client"
 
-interface Product extends ProductData {
+import { createContext, ReactNode, useEffect, useState } from "react"
+import { ProductData } from "../interfaces/productData"
+import { useRouter } from "next/navigation"
+import { getStoredCartItems } from "../_components/getStoredCartItems"
+
+export interface Product extends ProductData {
   quantity: number
   subtotal: number
 }
@@ -24,21 +27,20 @@ interface CartProviderProps {
 
 export const CartContext = createContext({} as CartContextProps)
 
-const localStorageKey = "@E-Commerce:cart"
-
 export const CartProvider = ({ children }: CartProviderProps) => {
+  const localStorageKey = "@E-Commerce:cart"
   const router = useRouter()
-  const [cart, setCart] = useState<Product[]>(() => {
-    const value = localStorage.getItem(localStorageKey)
+  const [cart, setCart] = useState<Product[]>([])
 
-    if (value) return JSON.parse(value)
-
-    return []
-  })
+  useEffect(() => {
+    const storedCartItems = getStoredCartItems()
+    setCart(storedCartItems)
+  }, [])
 
   const saveCart = (items: Product[]) => {
     setCart(items)
     localStorage.setItem(localStorageKey, JSON.stringify(items))
+    return items
   }
 
   const clearCart = () => {
@@ -51,27 +53,17 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     )
 
     if (productExistentInCart) {
-      const newCart = cart.map((item) => {
-        if (item.id === product.id) {
-          const quantity = item.quantity + 1
-          const subtotal = item.price * quantity
-
-          return { ...item, quantity, subtotal }
-        }
-
-        return item
-      })
-      saveCart(newCart)
-
+      router.push("/cart")
       return
     }
 
     const newProduct = { ...product, quantity: 1, subtotal: product.price }
     const newCart = [...cart, newProduct]
     saveCart(newCart)
+    router.push("/cart")
   }
 
-  const removeProductFromCart = (product: ProductData): void => {
+  const removeProductFromCart = (product: ProductData) => {
     const newCart = cart.filter(
       (item) => !(item.id === product.id && item.product === product.product),
     )
@@ -79,7 +71,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }
 
   const updateProductQuantity = (product: ProductData, newQuantity: number) => {
-    if (newQuantity < 0) return
+    if (newQuantity <= 0) return
 
     const productExistentInCart = cart.find(
       (item) => item.id === product.id && item.product === product.product,

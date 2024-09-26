@@ -6,19 +6,27 @@ import { HeartFilledIcon } from "@radix-ui/react-icons"
 import { useState } from "react"
 import Link from "next/link"
 import { Input } from "./ui/input"
+import { useRouter } from "next/navigation"
+import { useCart } from "../hooks/useCart"
 
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const { cart } = useCart()
+  const router = useRouter()
 
   const handleToggleMenu = () => {
     setIsOpenMenu(!isOpenMenu)
+  }
+
+  const handleCartPage = () => {
+    router.push("/cart")
   }
 
   return (
     <header className="xl:px-48">
       <div className="items-center lg:flex lg:flex-col">
         <div className="flex w-full items-center justify-between">
-          <div className="lg:hidden">
+          <div>
             <div className="left-2 top-[15px] z-50 flex">
               <Button
                 className="z-50 border-none"
@@ -41,7 +49,7 @@ const Header = () => {
               ></div>
 
               <div
-                className={`fixed left-0 top-0 z-40 flex h-full w-[60%] flex-col items-center justify-center bg-background transition-transform duration-300 ${isOpenMenu ? "translate-x-0" : "-translate-x-full"}`}
+                className={`fixed left-0 top-0 z-40 flex h-full w-[300px] flex-col items-center justify-center bg-background transition-transform duration-300 ${isOpenMenu ? "translate-x-0" : "-translate-x-full"}`}
               >
                 <nav className="mt-16 flex-1">
                   <ul>
@@ -80,17 +88,18 @@ const Header = () => {
 
             <div className="items-center justify-center">
               <Button
-                className="relative h-16 border-none lg:bg-green-500 lg:hover:border-green-500 lg:hover:bg-green-800"
+                className="relative flex h-16 justify-center border-none lg:border-solid lg:bg-green-500 lg:hover:border-green-500 lg:hover:bg-green-800"
                 variant="outline"
+                onClick={handleCartPage}
               >
-                <div className="relative">
+                <div className="relative flex justify-center">
                   <ShoppingCart width={28} height={28} />
 
-                  <span className="absolute -right-2 -top-3 flex pl-2 lg:text-white">
-                    0
+                  <span className="absolute -right-2 -top-3 flex pl-2 lg:-right-10 lg:top-5 lg:text-center">
+                    {cart.length}
                   </span>
                 </div>
-                <h3 className="hidden lg:block lg:pl-2">Meu carrinho</h3>
+                <h3 className="hidden uppercase lg:block lg:pl-2">carrinho</h3>
               </Button>
             </div>
           </div>
