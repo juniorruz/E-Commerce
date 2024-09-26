@@ -1,22 +1,22 @@
 import { currencyFormat } from "../helpers/currencyFormat"
 import { useCart } from "../hooks/useCart"
-import { Button } from "./ui/button"
 
 export const ConfirmOrder = () => {
-  const { cart, confirmOrder } = useCart()
+  const { cart } = useCart()
 
   const totalAmount = cart.reduce((acc, item) => acc + item.subtotal, 0)
 
   return (
-    <div className="flex items-center justify-end space-x-4 rounded-md py-3 md:h-[400px] md:flex-col md:space-y-5 md:bg-zinc-800">
-      <strong className="text-lg">Total: {currencyFormat(totalAmount)}</strong>
-      <div className="md:pr-4">
-        <Button
-          className="h-12 bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 uppercase"
-          onClick={confirmOrder}
-        >
-          Confirmar pedido
-        </Button>
+    <div className="flex w-full flex-col items-center justify-between space-x-4 rounded-md bg-zinc-800 py-3 md:sticky md:top-0 md:h-[400px] md:min-w-[200px] md:space-y-5">
+      <div className="flex h-full w-full flex-col items-center">
+        <div className="w-full border-b border-zinc-500 pb-2 text-center">
+          <h2 className="text-gray-400">Resumo</h2>
+        </div>
+        <div className="mt-3 flex items-center justify-center pr-2 md:mt-auto md:pr-0">
+          <strong className="text-lg">
+            Total: {currencyFormat(totalAmount)}
+          </strong>
+        </div>
       </div>
     </div>
   )

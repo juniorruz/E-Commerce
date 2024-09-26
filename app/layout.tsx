@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ProductProvider } from "./contexts/productContext"
 import { CartProvider } from "./contexts/cartContext"
+import { Footer } from "./_components/footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -19,7 +20,12 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={inter.className}>
         <ProductProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <div className="flex h-full flex-col">
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </div>
+          </CartProvider>
         </ProductProvider>
       </body>
     </html>

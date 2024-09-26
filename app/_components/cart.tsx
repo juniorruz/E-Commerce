@@ -1,33 +1,69 @@
 "use client"
 
 import Image from "next/image"
-import Header from "./header"
+
 import { useCart } from "../hooks/useCart"
 import { currencyFormat } from "../helpers/currencyFormat"
 import { FaTrashAlt } from "react-icons/fa"
 import { ConfirmOrder } from "./confirmOrder"
 import { CircleButton } from "./circleButton"
+import Link from "next/link"
+import { ShoppingCart } from "lucide-react"
+import { IoChevronBack } from "react-icons/io5"
+import { ButtonConfirmOrder } from "./buttonConfirmOrder"
 
 export const Cart = () => {
   const { cart, removeProductFromCart } = useCart()
 
   return (
     <>
-      <Header />
+      <header className="xl:px-48">
+        <div className="flex">
+          <div className="flex w-full items-center justify-between p-4 pt-5">
+            <div>
+              <button>
+                <Link className="flex items-center justify-center" href="/">
+                  <IoChevronBack className="md:text-xl" />
+                  <span className="text-xs">Voltar </span>
+                </Link>
+              </button>
+            </div>
+            <div>
+              <h1 className="text-center text-2xl uppercase">Carrinho</h1>
+            </div>
+            <div className="items-center justify-center">
+              <button>
+                <div className="relative flex justify-center">
+                  <ShoppingCart width={28} height={28} />
+
+                  <span className="absolute -right-2 -top-4 flex pl-2">
+                    <span className="relative h-6 w-6 items-center justify-center rounded-full bg-red-600 pt-0.5 text-sm">
+                      {cart.length}
+                    </span>
+                  </span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
       <div className="mt-5 flex-col px-4 xl:px-52">
         <div>
-          <div className="flex w-full">
+          <div className="hidden w-full md:block">
             <h1 className="pb-2 uppercase">Produtos no carrinho</h1>
           </div>
         </div>
-        <div className="flex h-32 items-center justify-center md:hidden">
+        <div className="pb-2 md:hidden">
+          <ButtonConfirmOrder />
+        </div>
+        <div className="flex items-center justify-center pb-2 md:hidden">
           <ConfirmOrder />
         </div>
         <div>
           {cart.length > 0 ? (
             <div className="flex flex-col md:flex-row">
-              <div className="w-full rounded-md bg-zinc-800 p-2">
-                <table className="w-full items-center justify-center">
+              <div className="w-full rounded-md bg-zinc-800">
+                <table className="w-full">
                   <tbody>
                     {cart.map((item, index) => (
                       <tr key={`${item.product}-${index}`} className="border-b">
@@ -80,8 +116,15 @@ export const Cart = () => {
                 </table>
               </div>
 
-              <div className="y flex-row md:space-x-4 md:pl-3">
-                <ConfirmOrder />
+              <div>
+                <div className="flex-row space-y-2 md:sticky md:top-0 md:pl-3">
+                  <div className="hidden md:block">
+                    <ConfirmOrder />
+                  </div>
+                  <div>
+                    <ButtonConfirmOrder />
+                  </div>
+                </div>
               </div>
             </div>
           ) : (

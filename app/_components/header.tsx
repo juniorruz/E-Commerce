@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="xl:px-48">
       <div className="items-center lg:flex lg:flex-col">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center justify-between pt-[2px]">
           <div>
             <div className="left-2 top-[15px] z-50 flex">
               <Button
@@ -95,14 +95,25 @@ const Header = () => {
                 <div className="relative flex justify-center">
                   <ShoppingCart width={28} height={28} />
 
-                  <span className="absolute -right-2 -top-3 flex pl-2 lg:-right-10 lg:top-5 lg:text-center">
-                    {cart.length}
+                  <span className="absolute -right-2 -top-4 flex pl-2 lg:-right-16 lg:top-5 lg:text-center">
+                    <div className="relative h-6 w-6 items-center justify-center rounded-full bg-red-600 pt-0.5 lg:flex lg:bg-transparent">
+                      {cart.length}
+                      {cart.length > 0 && (
+                        <span className="hidden pl-2 lg:block">
+                          {cart.length <= 1 ? "item" : "itens"}
+                        </span>
+                      )}
+                    </div>
                   </span>
                 </div>
                 <h3 className="hidden uppercase lg:block lg:pl-2">carrinho</h3>
               </Button>
             </div>
           </div>
+        </div>
+        <div className="relative w-full flex-col px-3 lg:hidden 2xl:w-[500px]">
+          <Input type="text" placeholder="Digite o que você procura" />
+          <Search className="absolute right-5 top-3" width={20} height={20} />
         </div>
       </div>
     </header>

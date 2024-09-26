@@ -51,7 +51,7 @@ export const Product = ({ products }: ProductsProps) => {
                     <h1>{product.brand}</h1>
                     <h1>{product.model}</h1>
                   </div>
-                  <div className="p-2">
+                  <div className="min-h-[200px] p-2">
                     <ul className="list-inside list-disc text-sm text-gray-400">
                       <li>Processador: {product.processor}</li>
                       <li>Memória RAM: {product.ram} GB</li>
