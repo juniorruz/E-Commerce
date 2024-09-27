@@ -88,7 +88,7 @@ const Header = () => {
 
             <div className="items-center justify-center">
               <Button
-                className="relative flex h-16 justify-center border-none lg:border-solid lg:bg-green-500 lg:hover:border-green-500 lg:hover:bg-green-800"
+                className="relative flex h-16 justify-center border-none lg:border-solid lg:bg-green-700 lg:hover:border-green-700 lg:hover:bg-green-800"
                 variant="outline"
                 onClick={handleCartPage}
               >

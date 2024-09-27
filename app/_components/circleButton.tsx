@@ -2,7 +2,6 @@
 
 import { CircleMinus, CirclePlus } from "lucide-react"
 import { useCart } from "../hooks/useCart"
-
 import { Product } from "../contexts/cartContext"
 
 export const CircleButton = ({ item }: { item: Product }) => {
@@ -19,7 +18,12 @@ export const CircleButton = ({ item }: { item: Product }) => {
       <span className="px-3 py-1">{item.quantity}</span>
       <button
         onClick={() => productCartIncrement(item)}
-        className="rounded-r px-3 py-1"
+        disabled={item.quantity >= 3}
+        className={`rounded-r px-3 py-1 ${
+          item.quantity >= 3
+            ? "cursor-not-allowed opacity-50"
+            : "cursor-pointer"
+        }`}
       >
         <CirclePlus width={18} height={18} />
       </button>
