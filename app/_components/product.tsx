@@ -72,7 +72,7 @@ export const Product = ({ products }: ProductsProps) => {
                     <div>
                       <Button
                         onClick={() => addProductIntoCart(product)}
-                        className="h-12 bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900"
+                        className="h-12 bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 hover:opacity-90"
                       >
                         <MdAddShoppingCart className="text-xl" />
                         Comprar

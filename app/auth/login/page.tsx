@@ -47,7 +47,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <header className="flex items-center justify-between p-4 pt-0 sm:pt-5 xl:px-48">
+      <header className="flex items-center justify-between p-4 pt-[2px] sm:pt-5 xl:px-48">
         <div className="flex items-center">
           <button>
             <Link className="flex" href="/">
@@ -119,7 +119,7 @@ const LoginPage = () => {
                     </div>
                     <div className="flex items-center justify-between pt-4">
                       <Button
-                        className="h-12 w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 uppercase"
+                        className="h-12 w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 uppercase hover:opacity-90"
                         type="submit"
                       >
                         {isSignInLoading ? (
@@ -142,7 +142,10 @@ const LoginPage = () => {
               <p className="mt-4 text-sm">Crie uma conta gratuita.</p>
             </div>
             <div className="flex w-full pt-3">
-              <Button className="mb-[120px] flex h-12 w-full border-solid bg-green-700 uppercase hover:border-green-700 hover:bg-green-800">
+              <Button
+                asChild
+                className="mb-[120px] flex h-12 w-full border-solid bg-green-700 uppercase hover:border-green-700 hover:bg-green-800"
+              >
                 <Link href="/auth/signup">Criar conta</Link>
               </Button>
             </div>
