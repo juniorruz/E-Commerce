@@ -14,6 +14,15 @@ interface ProductsProps {
 
 export const Product = ({ products }: ProductsProps) => {
   const { addProductIntoCart } = useCart()
+
+  const specificationsLabel = [
+    "Processador",
+    "Memória RAM",
+    "Armazenamento",
+    "Placa de vídeo",
+    "Sistema operacional",
+  ]
+
   return (
     <div className="grid w-full gap-2 px-4 md:grid-cols-2 lg:grid-cols-3 xl:px-52">
       {!products.length
@@ -51,16 +60,13 @@ export const Product = ({ products }: ProductsProps) => {
                     <h1>{product.brand}</h1>
                     <h1>{product.model}</h1>
                   </div>
-                  <div className="min-h-[200px] p-2">
+                  <div className="min-h-[100px] p-2">
                     <ul className="list-inside list-disc text-sm text-gray-400">
-                      <li>Processador: {product.processor}</li>
-                      <li>Memória RAM: {product.ram} GB</li>
-                      <li>Armazenamento: {product.storage}</li>
-                      <li>Tela: {product.screenSize} polegadas</li>
-                      <li>Gráficos: {product.graphicsCard}</li>
-                      <li>Bateria: {product.batteryLife} horas</li>
-                      <li>Peso: {product.weight} kg</li>
-                      <li>Sistema Operacional: {product.operatingSystem}</li>
+                      {product.specification.split(",").map((item, index) => (
+                        <li key={item}>
+                          <strong>{specificationsLabel[index]}:</strong> {item}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   <div className="flex items-center justify-between">

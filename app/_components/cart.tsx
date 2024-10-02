@@ -85,8 +85,7 @@ export const Cart = () => {
                           </td>
                           <td className="px-4 py-4">
                             <h2 className="text-sm font-semibold">
-                              {item.brand}, {item.model}, {item.processor},{" "}
-                              {item.ram}GB, {item.graphicsCard}, {item.storage}
+                              {item.brand}, {item.model}, {item.specification}
                             </h2>
 
                             <strong className="text-green-500">
