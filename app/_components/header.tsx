@@ -3,7 +3,7 @@
 import { MenuIcon, Search, ShoppingCart, XIcon } from "lucide-react"
 import { Button } from "./ui/button"
 import { HeartFilledIcon } from "@radix-ui/react-icons"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { Input } from "./ui/input"
 import { useRouter } from "next/navigation"
@@ -13,6 +13,7 @@ const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const { cart } = useCart()
   const router = useRouter()
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const handleToggleMenu = () => {
     setIsOpenMenu(!isOpenMenu)
@@ -21,6 +22,20 @@ const Header = () => {
   const handleCartPage = () => {
     router.push("/cart")
   }
+
+  useEffect(() => {
+    const clickOutsideHandler = (event: MouseEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setIsOpenMenu(false)
+      }
+    }
+    if (isOpenMenu) {
+      document.addEventListener("mousedown", clickOutsideHandler)
+    }
+    return () => {
+      document.removeEventListener("mousedown", clickOutsideHandler)
+    }
+  }, [isOpenMenu])
 
   return (
     <header className="xl:px-48">
@@ -49,18 +64,25 @@ const Header = () => {
               ></div>
 
               <div
+                ref={menuRef}
                 className={`fixed left-0 top-0 z-40 flex h-full w-[300px] flex-col items-center justify-center bg-background transition-transform duration-300 ${isOpenMenu ? "translate-x-0" : "-translate-x-full"}`}
               >
                 <nav className="mt-16 flex-1">
                   <ul>
                     <li>
-                      <Link href="/#">notebooks</Link>
+                      <Link onClick={handleToggleMenu} href="/#">
+                        notebooks
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/#">Computadores</Link>
+                      <Link onClick={handleToggleMenu} href="/#">
+                        Computadores
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/#">Computadores</Link>
+                      <Link onClick={handleToggleMenu} href="/#">
+                        Computadores
+                      </Link>
                     </li>
                   </ul>
                 </nav>
