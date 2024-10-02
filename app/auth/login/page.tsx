@@ -33,15 +33,18 @@ const LoginPage = () => {
   const form = useForm({ resolver: yupResolver(formSchema) })
 
   const onSubmit = async (data: yup.Asserts<typeof formSchema>) => {
+    setIsSignInLoading(true)
+
     const result = await signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false,
     })
+    console.log("resultado", result)
 
     if (result?.error) {
-      setSignInCredentialsError(!!result?.error)
-      setIsSignInLoading(true)
+      setSignInCredentialsError(!!result.error)
+      setIsSignInLoading(false)
     }
   }
 
