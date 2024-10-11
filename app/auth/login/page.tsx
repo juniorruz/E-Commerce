@@ -120,7 +120,7 @@ const LoginPage = () => {
                         )}
                       />
                     </div>
-                    <div className="flex items-center justify-between pt-4">
+                    <div className="flex items-center justify-between pt-2">
                       <Button
                         className="h-12 w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 uppercase hover:opacity-90"
                         type="submit"
