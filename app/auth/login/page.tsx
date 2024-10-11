@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { signIn } from "next-auth/react"
 import { IoChevronBack } from "react-icons/io5"
+import { useRouter } from "next/navigation"
 
 const formSchema = yup.object({
   email: yup
@@ -29,8 +30,12 @@ const LoginPage = () => {
   const [signInCredentialsError, setSignInCredentialsError] =
     useState<boolean>(false)
   const [isSignInLoading, setIsSignInLoading] = useState<boolean>(false)
+  const route = useRouter()
 
-  const form = useForm({ resolver: yupResolver(formSchema) })
+  const form = useForm({
+    resolver: yupResolver(formSchema),
+    defaultValues: { email: "", password: "" },
+  })
 
   const onSubmit = async (data: yup.Asserts<typeof formSchema>) => {
     setIsSignInLoading(true)
@@ -45,6 +50,9 @@ const LoginPage = () => {
     if (result?.error) {
       setSignInCredentialsError(!!result.error)
       setIsSignInLoading(false)
+    }
+    if (result?.ok) {
+      route.push("/")
     }
   }
 
@@ -120,7 +128,7 @@ const LoginPage = () => {
                         )}
                       />
                     </div>
-                    <div className="flex items-center justify-between pt-4">
+                    <div className="flex items-center justify-between pt-2">
                       <Button
                         className="h-12 w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 uppercase hover:opacity-90"
                         type="submit"
