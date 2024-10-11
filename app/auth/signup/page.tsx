@@ -14,8 +14,7 @@ import { postNewUser } from "@/services/api"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-
+import { redirect } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { IoChevronBack } from "react-icons/io5"
@@ -35,7 +34,6 @@ const formSchema = z.object({
 
 const SignUpPage = () => {
   const [error, setError] = useState<string>("")
-  const route = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,15 +45,16 @@ const SignUpPage = () => {
   })
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    console.log("dados enviados", data)
     const response = await postNewUser(data)
-
     if (!response.success) {
+      console.log("Resposta da API", response)
       setError(
         response.message ||
           "Usuário já cadastrado. Tente novamente com outro email.",
       )
     } else {
-      route.push("/auth/login")
+      redirect("/auth/login")
     }
   }
   return (
