@@ -1,3 +1,5 @@
+import { postLogin } from "@/services/api"
+
 import { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -6,24 +8,16 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Email", type: "email" },
+        email: { label: "Email", type: "email" },
         password: { label: "Senha", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials) return null
 
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`,
-          {
-            method: "POST",
-            body: JSON.stringify(credentials),
-            headers: { "content-type": "application/json" },
-          },
-        )
+        const res = await postLogin(credentials)
 
-        const user = await res.json()
-        if (res.ok && user) {
-          return user
+        if (res.success && res.data) {
+          return res.data
         }
         return null
       },
