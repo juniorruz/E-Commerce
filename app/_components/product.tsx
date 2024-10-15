@@ -50,9 +50,11 @@ export const Product = ({ products }: ProductsProps) => {
                 <CardHeader className="relative h-64 w-full">
                   <Image
                     src={product.imageUrl}
-                    fill
+                    fill={true}
                     alt={product.model}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="rounded-t-lg object-cover"
+                    priority={false}
                   />
                 </CardHeader>
                 <CardContent>
