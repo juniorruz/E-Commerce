@@ -39,6 +39,9 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       session.user = {
         id: token.id,
+        name: token.name,
+        email: token.email,
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any
       return session

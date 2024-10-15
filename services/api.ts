@@ -77,19 +77,6 @@ export const postNewUser = async (data: {
   }
 }
 
-export const postNewUser = async (data: {
-  name: string
-  email: string
-  password: string
-}): Promise<ApiResponse> => {
-  try {
-    const response = await api.post("/auth/signup", data)
-    return response.data
-  } catch (error) {
-    return { success: false, message: "Erro ao cadastrar" }
-  }
-}
-
 export const getNotebooks = () => api.get<ProductData[]>("/products")
 
 export default api
