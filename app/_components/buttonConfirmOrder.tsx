@@ -3,6 +3,7 @@ import { Button } from "./ui/button"
 
 export const ButtonConfirmOrder = () => {
   const { confirmOrder } = useCart()
+
   return (
     <div>
       <Button

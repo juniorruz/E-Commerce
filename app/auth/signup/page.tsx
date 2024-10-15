@@ -45,10 +45,8 @@ const SignUpPage = () => {
   })
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log("dados enviados", data)
     const response = await postNewUser(data)
     if (!response.success) {
-      console.log("Resposta da API", response)
       setError(
         response.message ||
           "Usuário já cadastrado. Tente novamente com outro email.",

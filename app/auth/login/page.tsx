@@ -45,7 +45,6 @@ const LoginPage = () => {
       password: data.password,
       redirect: false,
     })
-    console.log("resultado", result)
 
     if (result?.error) {
       setSignInCredentialsError(!!result.error)

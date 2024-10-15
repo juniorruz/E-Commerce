@@ -1,6 +1,6 @@
 "use client"
 
-import { MenuIcon, Search, ShoppingCart, XIcon } from "lucide-react"
+import { LogInIcon, MenuIcon, Search, ShoppingCart, XIcon } from "lucide-react"
 import { Button } from "./ui/button"
 import { HeartFilledIcon } from "@radix-ui/react-icons"
 import { useEffect, useRef, useState } from "react"
@@ -8,8 +8,10 @@ import Link from "next/link"
 import { Input } from "./ui/input"
 import { useRouter } from "next/navigation"
 import { useCart } from "../hooks/useCart"
+import { useSession } from "next-auth/react"
 
 const Header = () => {
+  const { data: session } = useSession()
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const { cart } = useCart()
   const router = useRouter()
@@ -42,17 +44,13 @@ const Header = () => {
       <div className="items-center lg:flex lg:flex-col">
         <div className="flex w-full items-center justify-between pt-[2px]">
           <div>
-            <div className="left-2 top-[15px] z-50 flex">
+            <div className="left-2 top-[15px] flex">
               <Button
-                className="z-50 border-none"
+                className="border-none"
                 variant="outline"
                 onClick={handleToggleMenu}
               >
-                {isOpenMenu ? (
-                  <XIcon width={28} height={28} />
-                ) : (
-                  <MenuIcon width={28} height={28} />
-                )}
+                <MenuIcon width={28} height={28} />
               </Button>
             </div>
 
@@ -65,27 +63,51 @@ const Header = () => {
 
               <div
                 ref={menuRef}
-                className={`fixed left-0 top-0 z-40 flex h-full w-[300px] flex-col items-center justify-center bg-background transition-transform duration-300 ${isOpenMenu ? "translate-x-0" : "-translate-x-full"}`}
+                className={`fixed left-0 top-0 z-40 flex h-full w-[300px] flex-col items-center bg-background transition-transform duration-300 ${isOpenMenu ? "translate-x-0" : "-translate-x-full"}`}
               >
-                <nav className="mt-16 flex-1">
-                  <ul>
-                    <li>
-                      <Link onClick={handleToggleMenu} href="/#">
-                        notebooks
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={handleToggleMenu} href="/#">
-                        Computadores
-                      </Link>
-                    </li>
-                    <li>
-                      <Link onClick={handleToggleMenu} href="/#">
-                        Computadores
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
+                <div className="fixed right-2 top-2 flex justify-end">
+                  <button onClick={handleToggleMenu} className="border-none">
+                    <XIcon width={28} height={28} />
+                  </button>
+                </div>
+                <div className="flex-col items-center">
+                  <div className="mt-8 flex text-xl">
+                    {session ? (
+                      <p>Olá, bem vindo {session?.user?.name}!</p>
+                    ) : (
+                      <div>
+                        <Link
+                          className="flex items-center gap-1"
+                          href={"/auth/login"}
+                        >
+                          <p>Faça seu login</p>
+                          <LogInIcon />
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex">
+                    <nav className="mt-4 flex-1">
+                      <ul>
+                        <li>
+                          <Link onClick={handleToggleMenu} href="/#">
+                            Notebooks
+                          </Link>
+                        </li>
+                        <li>
+                          <Link onClick={handleToggleMenu} href="/#">
+                            Computadores
+                          </Link>
+                        </li>
+                        <li>
+                          <Link onClick={handleToggleMenu} href="/#">
+                            Computadores
+                          </Link>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
               </div>
             </>
           </div>

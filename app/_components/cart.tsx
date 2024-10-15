@@ -87,22 +87,19 @@ export const Cart = () => {
                             <h2 className="text-sm font-semibold">
                               {item.brand}, {item.model}, {item.specification}
                             </h2>
-
                             <strong className="text-green-500">
                               {currencyFormat(item.price)}
                             </strong>
                           </td>
-                          <div className="flex items-center">
-                            <td className="hidden px-4 py-12 md:flex">
-                              <CircleButton item={item} />
-                            </td>
-                            <td className="hidden px-4 py-4 md:flex">
-                              <p className="font-semibold">
-                                Subtotal:{" "}
-                                {currencyFormat(item.quantity * item.price)}
-                              </p>
-                            </td>
-                          </div>
+                          <td className="hidden px-4 py-12 md:flex">
+                            <CircleButton item={item} />
+                          </td>
+                          <td className="hidden px-4 py-4 md:flex">
+                            <p className="font-semibold">
+                              Subtotal:{" "}
+                              {currencyFormat(item.quantity * item.price)}
+                            </p>
+                          </td>
                           <td className="px-4 py-4">
                             <button
                               onClick={() => removeProductFromCart(item)}
