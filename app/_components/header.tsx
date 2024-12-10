@@ -1,6 +1,13 @@
 "use client"
 
-import { LogInIcon, MenuIcon, Search, ShoppingCart, XIcon } from "lucide-react"
+import {
+  LogInIcon,
+  MenuIcon,
+  Search,
+  ShoppingCart,
+  UserCircleIcon,
+  XIcon,
+} from "lucide-react"
 import { Button } from "./ui/button"
 import { HeartFilledIcon } from "@radix-ui/react-icons"
 import { useEffect, useRef, useState } from "react"
@@ -25,6 +32,10 @@ const Header = () => {
     router.push("/cart")
   }
 
+  const handleLoginPage = () => {
+    router.push("/auth/login")
+  }
+
   useEffect(() => {
     const clickOutsideHandler = (event: MouseEvent) => {
       if (!menuRef.current?.contains(event.target as Node)) {
@@ -40,7 +51,7 @@ const Header = () => {
   }, [isOpenMenu])
 
   return (
-    <header className="xl:px-48">
+    <header className="2xl:px-[183px]">
       <div className="items-center lg:flex lg:flex-col">
         <div className="flex w-full items-center justify-between pt-[2px]">
           <div>
@@ -111,7 +122,7 @@ const Header = () => {
               </div>
             </>
           </div>
-          <div className="lg:pl-4">
+          <div className="pl-16 lg:pl-4">
             <h1 className="bg-gradient-to-r from-indigo-600 via-purple-600 to-purple-900 bg-clip-text pl-4 text-3xl font-bold text-transparent md:pl-0 lg:text-5xl">
               <Link href="/">Neon Tech</Link>
             </h1>
@@ -120,38 +131,55 @@ const Header = () => {
             <Input type="text" placeholder="Digite o que você procura" />
             <Search className="absolute right-2 top-3" width={20} height={20} />
           </div>
-          <div className="flex items-center lg:space-x-2 lg:p-4">
-            <Button className="border-none" variant="outline">
-              <HeartFilledIcon
-                width={28}
-                height={28}
-                className="lg:text-red-500"
-              />
-              <span className="ml-2 hidden lg:block">Favoritos</span>
-            </Button>
-
-            <div className="items-center justify-center">
+          <div className="flex">
+            {" "}
+            <div className="flex items-center lg:p-4">
               <Button
-                className="relative flex h-16 justify-center border-none lg:border-solid lg:bg-green-700 lg:hover:border-green-700 lg:hover:bg-green-800"
+                className="border-none"
                 variant="outline"
-                onClick={handleCartPage}
+                onClick={handleLoginPage}
               >
-                <div className="relative flex justify-center">
-                  <ShoppingCart width={28} height={28} />
-
-                  <span className="absolute -right-2 -top-4 flex pl-2 lg:-right-16 lg:top-5 lg:text-center">
-                    <div className="relative h-6 w-6 items-center justify-center rounded-full bg-red-600 pt-0.5 lg:flex lg:bg-transparent">
-                      {cart.length}
-                      {cart.length > 0 && (
-                        <span className="hidden pl-2 lg:block">
-                          {cart.length <= 1 ? "item" : "itens"}
-                        </span>
-                      )}
-                    </div>
-                  </span>
-                </div>
-                <h3 className="hidden uppercase lg:block lg:pl-2">carrinho</h3>
+                <UserCircleIcon width={28} height={28} />
+                <span className="ml-2 hidden text-xs uppercase lg:block">
+                  Entre/Cadastre-se
+                </span>
               </Button>
+            </div>
+            <div className="flex items-center lg:space-x-2 lg:p-4">
+              <Button className="border-none" variant="outline">
+                <HeartFilledIcon
+                  width={28}
+                  height={28}
+                  className="lg:text-red-500"
+                />
+                <span className="ml-2 hidden lg:block">Favoritos</span>
+              </Button>
+
+              <div className="items-center justify-center">
+                <Button
+                  className="relative flex h-16 justify-center border-none lg:border-solid lg:bg-green-700 lg:hover:border-green-700 lg:hover:bg-green-800"
+                  variant="outline"
+                  onClick={handleCartPage}
+                >
+                  <div className="relative flex justify-center">
+                    <ShoppingCart width={28} height={28} />
+
+                    <span className="absolute -right-2 -top-4 flex pl-2 lg:-right-16 lg:top-5 lg:text-center">
+                      <div className="relative h-6 w-6 items-center justify-center rounded-full bg-red-600 pt-0.5 lg:flex lg:bg-transparent">
+                        {cart.length}
+                        {cart.length > 0 && (
+                          <span className="hidden pl-2 lg:block">
+                            {cart.length <= 1 ? "item" : "itens"}
+                          </span>
+                        )}
+                      </div>
+                    </span>
+                  </div>
+                  <h3 className="hidden uppercase lg:block lg:pl-2">
+                    carrinho
+                  </h3>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
