@@ -24,7 +24,7 @@ export const Product = ({ products }: ProductsProps) => {
   ]
 
   return (
-    <div className="grid w-full gap-2 px-4 md:grid-cols-2 lg:grid-cols-3 xl:px-52">
+    <div className="grid w-full gap-2 px-2 md:grid-cols-2 lg:grid-cols-3 2xl:px-[192px]">
       {!products.length
         ? [...Array(15)].map((_, index) => (
             <div className="mt-3 grid w-full gap-2" key={index}>
