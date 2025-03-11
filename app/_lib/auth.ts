@@ -17,7 +17,11 @@ export const authOptions: AuthOptions = {
         const res = await postLogin(credentials)
 
         if (res.success && res.data) {
-          return res.data
+          return {
+            id: res.data.id,
+
+            email: res.data.email,
+          }
         }
         return null
       },
