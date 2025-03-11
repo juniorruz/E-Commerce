@@ -49,6 +49,7 @@ const LoginPage = () => {
     if (result?.error) {
       setSignInCredentialsError(!!result.error)
       setIsSignInLoading(false)
+      form.reset({ password: "", email: form.getValues("email") })
     }
     if (result?.ok) {
       route.push("/")
@@ -103,6 +104,10 @@ const LoginPage = () => {
                                 type="email"
                                 placeholder="Email"
                                 className="w-full"
+                                onChange={(e) => {
+                                  field.onChange(e)
+                                  setSignInCredentialsError(false)
+                                }}
                               />
                             </FormControl>
                           </FormItem>
@@ -121,6 +126,10 @@ const LoginPage = () => {
                                 type="password"
                                 placeholder="Senha"
                                 className="w-full"
+                                onChange={(e) => {
+                                  field.onChange(e)
+                                  setSignInCredentialsError(false)
+                                }}
                               />
                             </FormControl>
                           </FormItem>
