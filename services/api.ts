@@ -79,4 +79,7 @@ export const postNewUser = async (data: {
 
 export const getNotebooks = () => api.get<ProductData[]>("/products")
 
+export const searchProducts = (searchTerm: string) =>
+  api.get(`/products/:search?query=${searchTerm}`)
+
 export default api

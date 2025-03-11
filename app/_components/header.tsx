@@ -3,7 +3,6 @@
 import {
   LogInIcon,
   MenuIcon,
-  Search,
   ShoppingCart,
   UserCircleIcon,
   XIcon,
@@ -12,10 +11,11 @@ import { Button } from "./ui/button"
 import { HeartFilledIcon } from "@radix-ui/react-icons"
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { Input } from "./ui/input"
+
 import { useRouter } from "next/navigation"
 import { useCart } from "../hooks/useCart"
 import { useSession } from "next-auth/react"
+import { InputSearch } from "./inputSearch"
 
 const Header = () => {
   const { data: session } = useSession()
@@ -128,8 +128,7 @@ const Header = () => {
             </h1>
           </div>
           <div className="relative hidden w-[350px] lg:block 2xl:w-[500px]">
-            <Input type="text" placeholder="Digite o que você procura" />
-            <Search className="absolute right-2 top-3" width={20} height={20} />
+            <InputSearch />
           </div>
           <div className="flex">
             {" "}
@@ -184,8 +183,7 @@ const Header = () => {
           </div>
         </div>
         <div className="relative w-full flex-col px-3 lg:hidden 2xl:w-[500px]">
-          <Input type="text" placeholder="Digite o que você procura" />
-          <Search className="absolute right-5 top-3" width={20} height={20} />
+          <InputSearch />
         </div>
       </div>
     </header>

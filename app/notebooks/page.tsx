@@ -1,6 +1,6 @@
 "use client"
 
-import { Product } from "../_components/product"
+import { ProductList } from "../_components/ProductList"
 import { useProduct } from "../hooks/useProduct"
 
 const NotebookPage = () => {
@@ -8,7 +8,7 @@ const NotebookPage = () => {
   return (
     <>
       <div className="flex w-full flex-col items-center">
-        <Product products={notebooks} />
+        <ProductList products={notebooks} />
       </div>
     </>
   )
